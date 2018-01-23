@@ -18,4 +18,21 @@ public final class Point {
     public final String toString() {
         return MessageFormat.format("Point<{0}, {1}>", x, y);
     }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) return true;
+        if ((obj == null) || (!getClass().equals(obj.getClass()))) return false;
+
+        final Point point = (Point) obj;
+
+        return (x == point.x) && (y == point.y);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = (31 * result) + y;
+        return result;
+    }
 }

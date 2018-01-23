@@ -1,7 +1,10 @@
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -15,30 +18,42 @@ import java.util.stream.Stream;
 @SuppressWarnings("ClassHasNoToStringMethod")
 public final class CombinationGenerator {
 
-    @SuppressWarnings("WeakerAccess")
-    public final int maxX, maxY;
+    @SuppressWarnings({"WeakerAccess", "PublicField"})
+    public Map<Point, Point> edges;
 
     @SuppressWarnings({"WeakerAccess", "PublicField"})
     public final Set<Triangle> triangles;
 
+    @SuppressWarnings({"WeakerAccess", "PublicField"})
+    public final Set<Point> points;
+
     public CombinationGenerator(final Collection<Triangle> triangles) {
         this.triangles = new HashSet<>(triangles);
 
-        final Stream<Point> allPoints = this.triangles.stream()
-                .flatMap(x -> Stream.of(x.pointA, x.pointB, x.pointC));
+        points = this.triangles.stream().flatMap((Triangle triangle) -> Stream
+                .of(triangle.pointA, triangle.pointB, triangle.pointC))
+                .collect(Collectors.toSet());
 
-        maxX = allPoints.map(x -> x.x).max(Integer::compareTo).get();
-        maxY = allPoints.map(x -> x.y).max(Integer::compareTo).get();
-    }
-
-    public List<Point> generate(final Point start, final Point dest) {
-
+        triangles.forEach((Triangle triangle) -> {
+            edges.put(triangle.pointA, triangle.pointB);
+            edges.put(triangle.pointB, triangle.pointC);
+            edges.put(triangle.pointA, triangle.pointC);
+        });
     }
 
     /**
-     * X and Y in both points must be no smaller than 0.
-     * X and Y in both points must be no greater than the greatest X and Y calculated in the constructor.
+     * Produce a {@link List} of valid configuartions.
      *
+     * @param start first {@link Point}
+     * @param dest second {@link Point}
+     * @return a {@link List} of valid configurations ie {@link Point}s
+     */
+
+    public List<Point> generate(final Point start, final Point dest) {
+        return new LinkedList<>();
+    }
+
+    /**
      * @param start first {@link Point}
      * @param dest second {@link Point}
      * @return true iff the configuration is valid
@@ -46,7 +61,9 @@ public final class CombinationGenerator {
 
     @SuppressWarnings("OverlyComplexBooleanExpression")
     private boolean isValid(final Point start, final Point dest) {
-        return (start.x >= 0) && (dest.x >= 0) && (start.x <= maxX) && (dest.x <= maxX) && (start.y >= 0) && (dest.y >= 0) && (start.y <= maxY) && (dest.y <= maxY);
+        return !edges.entrySet().stream().anyMatch((Map.Entry<Point, Point> edge) -> {
+            edge.
+        })
     }
 }
 
