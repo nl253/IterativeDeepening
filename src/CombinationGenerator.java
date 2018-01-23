@@ -1,8 +1,8 @@
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 public final class CombinationGenerator {
 
     @SuppressWarnings({"WeakerAccess", "PublicField"})
-    public Map<Point, Point> edges;
+    public Set<Segment> segments;
 
     @SuppressWarnings({"WeakerAccess", "PublicField"})
     public final Set<Triangle> triangles;
@@ -34,11 +34,8 @@ public final class CombinationGenerator {
                 .of(triangle.pointA, triangle.pointB, triangle.pointC))
                 .collect(Collectors.toSet());
 
-        triangles.forEach((Triangle triangle) -> {
-            edges.put(triangle.pointA, triangle.pointB);
-            edges.put(triangle.pointB, triangle.pointC);
-            edges.put(triangle.pointA, triangle.pointC);
-        });
+        triangles.forEach((Triangle triangle) -> Collections
+                .addAll(segments, triangle.getSegments()));
     }
 
     /**
@@ -61,9 +58,8 @@ public final class CombinationGenerator {
 
     @SuppressWarnings("OverlyComplexBooleanExpression")
     private boolean isValid(final Point start, final Point dest) {
-        return !edges.entrySet().stream().anyMatch((Map.Entry<Point, Point> edge) -> {
-            edge.
-        })
+        return triangles.stream()
+                .noneMatch((Triangle triangle) -> triangle.isIn(dest));
     }
 }
 

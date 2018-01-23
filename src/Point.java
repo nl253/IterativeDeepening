@@ -7,32 +7,34 @@ import java.text.MessageFormat;
 public final class Point {
 
     @SuppressWarnings("WeakerAccess")
-    public final int x, y;
+    public final double x, y;
 
-    Point(final int x, final int y) {
+    /**
+     * @param x
+     * @param y
+     */
+
+    public Point(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public final String toString() {
-        return MessageFormat.format("Point<{0}, {1}>", x, y);
-    }
-
-    @Override
     public boolean equals(final Object obj) {
-        if (this == obj) return true;
-        if ((obj == null) || (!getClass().equals(obj.getClass()))) return false;
-
+        if (!(obj instanceof Point)) return false;
         final Point point = (Point) obj;
-
-        return (x == point.x) && (y == point.y);
+        return (point.x == x) && (point.y == y);
     }
 
     @Override
     public int hashCode() {
-        int result = x;
+        double result = x;
         result = (31 * result) + y;
-        return result;
+        return (int) result;
+    }
+
+    @Override
+    public final String toString() {
+        return MessageFormat.format("Point<x: {0}, y: {1}>", x, y);
     }
 }
