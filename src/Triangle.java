@@ -8,7 +8,7 @@ import java.util.Set;
 public final class Triangle {
 
     @SuppressWarnings({"PackageVisibleField", "WeakerAccess", "PublicField"})
-    public final Point pointA, pointB, pointC;
+    public final Vertex pointA, pointB, pointC;
 
     /**
      * @param pointA point a
@@ -16,7 +16,8 @@ public final class Triangle {
      * @param pointC point c
      */
 
-    public Triangle(final Point pointA, final Point pointB, final Point pointC) {
+    @SuppressWarnings("WeakerAccess")
+    public Triangle(final Vertex pointA, final Vertex pointB, final Vertex pointC) {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
@@ -37,7 +38,8 @@ public final class Triangle {
         return segments;
     }
 
-    boolean isIn(final Point point) {
+    @SuppressWarnings("FloatingVertexEquality")
+    boolean isIn(final Vertex point) {
         final double a1 = new Triangle(pointA, pointB, point).area();
         final double a2 = new Triangle(pointC, pointB, point).area();
         final double a3 = new Triangle(pointA, pointC, point).area();
@@ -48,14 +50,14 @@ public final class Triangle {
      * @return area    = (Ax (By − Cy) + Bx (Cy − Ay) + Cx (Ay − By)) / 2
      */
 
-    @SuppressWarnings("ImplicitNumericConversion")
+    @SuppressWarnings({"ImplicitNumericConversion", "PublicMethodNotExposedInInterface", "WeakerAccess"})
     public double area() {
         return ((pointA.x * (pointB.y - pointC.y)) + (pointB.x * (pointC.y - pointA.y)) + (pointC.x * (pointA.y - pointB.y))) / 2;
     }
 
     /**
      * @param obj an {@link Object}
-     * @return true iff obj is a {@link Triangle} and it's {@link Point}s are the same as {@link Point}s in this
+     * @return true iff obj is a {@link Triangle} and it's {@link Vertex}s are the same as {@link Vertex}s in this
      */
 
     @SuppressWarnings("FeatureEnvy")
