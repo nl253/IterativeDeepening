@@ -1,8 +1,9 @@
 import java.text.MessageFormat;
-import java.util.Set;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
- * @author nl253
+ * @author Norbert Logiewa nl253
  */
 
 public final class Triangle {
@@ -38,38 +39,30 @@ public final class Triangle {
         return segments;
     }
 
-    @SuppressWarnings("FloatingVertexEquality")
-    boolean isIn(final Vertex point) {
-        final double a1 = new Triangle(pointA, pointB, point).area();
-        final double a2 = new Triangle(pointC, pointB, point).area();
-        final double a3 = new Triangle(pointA, pointC, point).area();
-        return area() == (a1 + a2 + a3);
-    }
-
     /**
-     * @return area    = (Ax (By − Cy) + Bx (Cy − Ay) + Cx (Ay − By)) / 2
-     */
-
-    @SuppressWarnings({"ImplicitNumericConversion", "PublicMethodNotExposedInInterface", "WeakerAccess"})
-    public double area() {
-        return ((pointA.x * (pointB.y - pointC.y)) + (pointB.x * (pointC.y - pointA.y)) + (pointC.x * (pointA.y - pointB.y))) / 2;
-    }
-
-    /**
-     * @param obj an {@link Object}
+     * @param o an {@link Object}
      * @return true iff obj is a {@link Triangle} and it's {@link Vertex}s are the same as {@link Vertex}s in this
      */
 
     @SuppressWarnings("FeatureEnvy")
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(final Object o) {
 
-        if (!(obj instanceof Triangle)) return false;
+        if (!(o instanceof Triangle)) return false;
 
-        final Triangle triangle = (Triangle) obj;
+        final Triangle triangle = (Triangle) o;
 
-        return Set.of(pointA, pointB, pointC)
-                .containsAll(Set.of(pointA, pointB, pointC));
+        final Collection<Vertex> a = new HashSet<>(3);
+        a.add(pointA);
+        a.add(pointB);
+        a.add(pointC);
+
+        final Collection<Vertex> b = new HashSet<>(3);
+        b.add(triangle.pointA);
+        b.add(triangle.pointB);
+        b.add(triangle.pointC);
+
+        return a.containsAll(b);
     }
 
     @SuppressWarnings("FeatureEnvy")

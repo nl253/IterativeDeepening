@@ -1,13 +1,13 @@
 import java.text.MessageFormat;
 
 /**
- * @author nl253
+ * @author Norbert Logiewa nl253
  */
 
 public final class Segment {
 
     @SuppressWarnings({"PackageVisibleField", "PublicField", "WeakerAccess"})
-    public final Point a, b;
+    public final Vertex a, b;
 
     /**
      * @param a
@@ -15,7 +15,7 @@ public final class Segment {
      */
 
     @SuppressWarnings("WeakerAccess")
-    public Segment(final Point a, final Point b) {
+    public Segment(final Vertex a, final Vertex b) {
         this.a = a;
         this.b = b;
     }
