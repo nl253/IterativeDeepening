@@ -125,7 +125,9 @@ public final class CombinationGenerator {
     @SuppressWarnings("OverlyComplexBooleanExpression")
     private boolean isValid(final Vertex start, final Vertex dest) {
         return triangles.stream().noneMatch((Triangle x) -> Vertex
-                .vertexInterior(dest, x.pointA, x.pointB, x.pointC));
+                .vertexInterior(dest, x.pointA, x.pointB, x.pointC) || Vertex
+                .linesIntersect(x.pointA, x.pointB, start, dest) || Vertex
+                .linesIntersect(x.pointA, x.pointC, start, dest));
     }
 
     /**
