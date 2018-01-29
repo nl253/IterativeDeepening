@@ -130,7 +130,6 @@ public final class CombinationGenerator {
      * @return a {@link String} representation of the solution ({@link List} of {@link Vertex}es)
      */
 
-
     static String format(final Collection<Vertex> vertices) {
         return vertices.stream().map(Vertex::toString)
                 .collect(Collectors.joining(" "));

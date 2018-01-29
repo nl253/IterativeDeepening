@@ -26,7 +26,7 @@ public final class Triangle {
 
     /**
      * @param o an {@link Object}
-     * @return true iff obj is a {@link Triangle} and it's {@link Vertex}s are the same as {@link Vertex}s in this
+     * @return true iff o is a {@link Triangle} and it's {@link Vertex}s are the same as {@link Vertex}s in this
      */
 
     @SuppressWarnings("FeatureEnvy")

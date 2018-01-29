@@ -135,9 +135,22 @@ public final class Vertex implements Comparable<Vertex> {
         return MessageFormat.format("({0}, {1})", x, y);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof Vertex)) return false;
+        final Vertex vertex = ((Vertex) o);
+        return (vertex.x == x) && (vertex.y == y);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = (31 * result) + y;
+        return result;
+    }
+
     @SuppressWarnings({"InterfaceMayBeAnnotatedFunctional", "PackageVisibleInnerClass"})
     interface Predicate {
-
         boolean predicate(int denominator, int lambdaNumerator, int muNumerator);
     }
 }
