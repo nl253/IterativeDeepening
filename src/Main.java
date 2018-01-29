@@ -9,7 +9,7 @@ public final class Main {
 
     private Main() {}
 
-    @SuppressWarnings("ImplicitDefaultCharsetUsage")
+    @SuppressWarnings({"ImplicitDefaultCharsetUsage", "OverlyLongMethod", "FeatureEnvy"})
     public static void main(final String... args) throws IOException {
 
         /* Copied from the PDF */

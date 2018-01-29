@@ -95,11 +95,14 @@ public final class CombinationGenerator {
         else {
             final List<Vertex> neighbours = getAdjecentVerticies(start);
             for (final Vertex neighbour : neighbours) {
-                final List<Vertex> maybe = limitedDepthFirstSearch(dest, neighbour, depth + 1);
-                if (maybe != null) return maybe;
+                final List<Vertex> maybe = limitedDepthFirstSearch(dest, neighbour, depth - 1);
+                if (maybe != null) {
+                    maybe.add(start);
+                    return maybe;
+                }
             }
+            return null;
         }
-        return null;
     }
 
     /**
@@ -121,7 +124,7 @@ public final class CombinationGenerator {
 
     @SuppressWarnings("OverlyComplexBooleanExpression")
     private boolean isValid(final Vertex start, final Vertex dest) {
-        return triangles.stream().anyMatch((Triangle x) -> Vertex
+        return triangles.stream().noneMatch((Triangle x) -> Vertex
                 .vertexInterior(dest, x.pointA, x.pointB, x.pointC));
     }
 
