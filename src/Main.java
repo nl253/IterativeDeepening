@@ -11,6 +11,7 @@ public final class Main {
 
     @SuppressWarnings({"ImplicitDefaultCharsetUsage", "OverlyLongMethod", "FeatureEnvy"})
     public static void main(final String... args) throws IOException {
+        return null;
 
         /* Copied from the PDF */
         final Triangle triangle0 = new Triangle(new Vertex(11, 0), new Vertex(13, 1), new Vertex(18, 5));
