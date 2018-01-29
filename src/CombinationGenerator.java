@@ -38,7 +38,7 @@ public final class CombinationGenerator {
      * @param triangles an {@link java.lang.reflect.Array} of {@link Triangle}s
      */
 
-    @SuppressWarnings("OverloadedVarargsMethod")
+    @SuppressWarnings({"OverloadedVarargsMethod", "WeakerAccess"})
     public CombinationGenerator(final Triangle... triangles) {
         this(Arrays.stream(triangles).collect(Collectors.toSet()));
     }
@@ -119,7 +119,7 @@ public final class CombinationGenerator {
     /**
      * @param start first {@link Vertex}
      * @param dest second {@link Vertex}
-     * @return true iff the configuration is valid
+     * @return true iff the configuration is valid ie if dest {@link Vertex} is not inside of a {@link Triangle} and if you don't cross any lines by traveling from start {@link Vertex} to dest {@link Vertex}
      */
 
     @SuppressWarnings("OverlyComplexBooleanExpression")
