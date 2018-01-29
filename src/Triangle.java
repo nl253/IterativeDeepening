@@ -25,21 +25,6 @@ public final class Triangle {
     }
 
     /**
-     * @return an {@link java.lang.reflect.Array} of 3 {@link Segment}s
-     */
-
-    @SuppressWarnings("PublicMethodNotExposedInInterface")
-    public Segment[] getSegments() {
-        final Segment[] segments = new Segment[3];
-
-        segments[0] = new Segment(pointA, pointB);
-        segments[1] = new Segment(pointB, pointC);
-        segments[2] = new Segment(pointA, pointC);
-
-        return segments;
-    }
-
-    /**
      * @param o an {@link Object}
      * @return true iff obj is a {@link Triangle} and it's {@link Vertex}s are the same as {@link Vertex}s in this
      */
