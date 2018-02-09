@@ -122,12 +122,13 @@ public final class CombinationGenerator {
      * @return true iff the configuration is valid ie if dest {@link Vertex} is not inside of a {@link Triangle} and if you don't cross any lines by traveling from start {@link Vertex} to dest {@link Vertex}
      */
 
-    @SuppressWarnings("OverlyComplexBooleanExpression")
+    @SuppressWarnings({"OverlyComplexBooleanExpression", "FeatureEnvy"})
     private boolean isValid(final Vertex start, final Vertex dest) {
         return triangles.stream().noneMatch((Triangle x) -> Vertex
                 .vertexInterior(dest, x.pointA, x.pointB, x.pointC) || Vertex
                 .linesIntersect(x.pointA, x.pointB, start, dest) || Vertex
-                .linesIntersect(x.pointA, x.pointC, start, dest));
+                .linesIntersect(x.pointA, x.pointC, start, dest) || Vertex
+                .linesIntersect(x.pointB, x.pointC, start, dest));
     }
 
     /**
