@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -7,10 +8,12 @@ import java.util.StringTokenizer;
  * @author Norbert Logiewa nl253
  */
 
-public final class FormatChecker {
+@SuppressWarnings({"AlibabaUndefineMagicConstant", "AliEqualsAvoidNull", "UseOfSystemOutOrSystemErr", "LiteralAsArgToStringEquals", "UseOfStringTokenizer", "ClassIndependentOfModule", "ClassUnconnectedToPackage", "HardcodedLineSeparator"})
+final class FormatChecker {
 
     private FormatChecker() {}
 
+    @SuppressWarnings({"ImplicitDefaultCharsetUsage", "StringConcatenation", "UseOfStringTokenizer", "StringBufferWithoutInitialCapacity"})
     public static void main(final String[] args) {
         try (BufferedReader br = new BufferedReader(new FileReader(args[0]))) {
             final StringBuilder sb = new StringBuilder();
@@ -25,14 +28,19 @@ public final class FormatChecker {
             final StringTokenizer st = new StringTokenizer(sb.toString());
             if (parseOpeningBracket(st)) System.out.println("ok");
             else System.out.println("problem");
+        } catch (final FileNotFoundException e) {
+            e.printStackTrace();
         } catch (final IOException e) {
             System.err.println("Caught IOException: " + e.getMessage());
         }
     }
 
-    public static boolean parseOpeningBracket(final StringTokenizer st) {
+    @SuppressWarnings("LiteralAsArgToStringEquals")
+    private static boolean parseOpeningBracket(final StringTokenizer st) {
         if (st.hasMoreTokens()) {
+            @SuppressWarnings("StringTokenizerDelimiter")
             final String token = st.nextToken(" |0|1|2|3|4|5|6|7|8|9");
+            //noinspection AliEqualsAvoidNull
             if (token.equals("(")) {
                 System.out.print("(");
                 return parseX(st);
@@ -40,10 +48,12 @@ public final class FormatChecker {
         } else return true;
     }
 
-    public static boolean parseX(final StringTokenizer st) {
+    @SuppressWarnings("MagicNumber")
+    private static boolean parseX(final StringTokenizer st) {
         if (st.hasMoreTokens()) {
             final String token = st.nextToken(" |,");
-            int x = Integer.parseInt(token);
+            final int x = Integer.parseInt(token);
+            //noinspection ConstantOnLeftSideOfComparison
             if ((0 <= x) && (x < 24)) {
                 System.out.print(String.valueOf(x));
                 return parseComma(st);
@@ -53,9 +63,12 @@ public final class FormatChecker {
         }
     }
 
-    public static boolean parseComma(final StringTokenizer st) {
+    @SuppressWarnings("UseOfStringTokenizer")
+    private static boolean parseComma(final StringTokenizer st) {
         if (st.hasMoreTokens()) {
-            String token = st.nextToken(" |0|1|2|3|4|5|6|7|8|9");
+            @SuppressWarnings("StringTokenizerDelimiter")
+            final String token = st.nextToken(" |0|1|2|3|4|5|6|7|8|9");
+            //noinspection LiteralAsArgToStringEquals
             if (token.equals(",")) {
                 System.out.print(", ");
                 return parseY(st);
@@ -63,11 +76,13 @@ public final class FormatChecker {
         } else return false;
     }
 
-    public static boolean parseY(final StringTokenizer st) {
+    @SuppressWarnings("ConstantOnLeftSideOfComparison")
+    private static boolean parseY(@SuppressWarnings("UseOfStringTokenizer")
+                                  final StringTokenizer st) {
 
         if (st.hasMoreTokens()) {
             final String token = st.nextToken(" |)");
-            int y = Integer.parseInt(token);
+            final int y = Integer.parseInt(token);
             if ((0 <= y) && (y < 24)) {
                 System.out.print(String.valueOf(y));
                 return parseClosingBracket(st);
@@ -75,9 +90,10 @@ public final class FormatChecker {
         } else return false;
     }
 
-    public static boolean parseClosingBracket(final StringTokenizer st) {
+    private static boolean parseClosingBracket(final StringTokenizer st) {
         if (st.hasMoreTokens()) {
             final String token = st.nextToken(" |\n");
+            //noinspection AliEqualsAvoidNull
             if (token.equals(")")) {
                 System.out.print(") ");
                 return parseOpeningBracket(st);

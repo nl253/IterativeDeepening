@@ -4,17 +4,17 @@ import java.text.MessageFormat;
  * @author Norbert Logiewa nl253
  */
 
+@SuppressWarnings({"AccessingNonPublicFieldOfAnotherObject", "WeakerAccess"})
 public final class Vertex implements Comparable<Vertex> {
 
-    @SuppressWarnings("WeakerAccess")
-    public final int x, y;
+    private final int x, y;
 
     /**
-     * @param x
-     * @param y
+     * @param x the first coordinate
+     * @param y the second coordinate
      */
 
-    public Vertex(final int x, final int y) {
+    Vertex(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
@@ -149,8 +149,10 @@ public final class Vertex implements Comparable<Vertex> {
         return result;
     }
 
-    @SuppressWarnings({"InterfaceMayBeAnnotatedFunctional", "PackageVisibleInnerClass"})
+    @SuppressWarnings({"InterfaceMayBeAnnotatedFunctional", "PackageVisibleInnerClass", "AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc"})
     interface Predicate {
+
+        @SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
         boolean predicate(int denominator, int lambdaNumerator, int muNumerator);
     }
 }

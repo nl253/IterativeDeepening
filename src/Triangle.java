@@ -3,12 +3,18 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
+ * {@link Triangle} is how I chose encode the problem.
+ * For the purpose of checking if {@link Triangle} edges are crossed,
+ * {@link Vertex} objects need to be grouped into 3s.
+ * A {@link Collection} of {@link Triangle} is fed into {@link SolutionGenerator}
+ * which then runs the algorithm to produces a solution.
+ *
  * @author Norbert Logiewa nl253
  */
 
-public final class Triangle {
+final class Triangle {
 
-    @SuppressWarnings({"PackageVisibleField", "WeakerAccess", "PublicField"})
+    @SuppressWarnings({"WeakerAccess", "PublicField"})
     public final Vertex pointA, pointB, pointC;
 
     /**
@@ -18,7 +24,7 @@ public final class Triangle {
      */
 
     @SuppressWarnings("WeakerAccess")
-    public Triangle(final Vertex pointA, final Vertex pointB, final Vertex pointC) {
+    Triangle(final Vertex pointA, final Vertex pointB, final Vertex pointC) {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
@@ -29,7 +35,6 @@ public final class Triangle {
      * @return true iff o is a {@link Triangle} and it's {@link Vertex}s are the same as {@link Vertex}s in this
      */
 
-    @SuppressWarnings("FeatureEnvy")
     @Override
     public boolean equals(final Object o) {
 
